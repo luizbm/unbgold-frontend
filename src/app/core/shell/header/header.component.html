@@ -1,0 +1,21 @@
+
+<mat-toolbar color="primary" class="fixed-top">
+  <mat-toolbar-row>
+    
+    <img src="/favicon.ico" width="30" height="30" alt="">
+    <span class="tool-bar-title">UnBGOLD</span>
+    <a class="header-icon" mat-flat-button routerLinkActive="active" routerLink="/datasets">Datasets</a>
+    <a class="header-icon" mat-flat-button routerLinkActive="active" routerLink="/professores">Professores</a>
+    <a class="header-icon" mat-flat-button routerLinkActive="active" routerLink="/turmas">Turmas</a>
+
+
+     <span class="header-spacer"></span>
+
+    <span>{{(user$ | async)?.email}}</span>
+    <span *ngIf="timer"> <a mat-flat-button>[{{timer}}]</a></span>
+    <button mat-icon-button >
+      <mat-icon (click)="deslogar()">power_settings_new</mat-icon>
+    </button>
+
+  </mat-toolbar-row>
+</mat-toolbar>

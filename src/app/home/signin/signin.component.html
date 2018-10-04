@@ -1,0 +1,54 @@
+
+<mat-card style="text-align: -webkit-center; background-color:gainsboro;" >
+
+        <mat-card-title>Login</mat-card-title>
+    
+    <mat-card-content>
+
+        <form [formGroup]="loginForm" >
+            
+            <table class="login-full-width" >
+                <tr>
+                    <td>
+                        <mat-form-field >
+                            <input #userEmailInput
+                            formControlName="userEmail"
+                            type="email"
+                            matInput
+                            placeholder="email do usuário"
+                            autofocus>
+                        </mat-form-field>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <mat-form-field>
+                            <input
+                            matInput
+                            formControlName="password"
+                            type="password"
+                            placeholder="senha do usuário">
+                        </mat-form-field>
+                    </td>                    
+                </tr>
+            </table>
+            
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <button
+            (click)="login()"
+            mat-raised-button
+            [disabled]="loginForm.invalid">
+            login
+        </button>
+    </mat-card-actions>
+
+    <mat-card-footer>
+        <mat-card-subtitle>
+            Ainda não é um usuário do sistema? <a>Registre-se agora</a>
+        </mat-card-subtitle>
+    </mat-card-footer>
+</mat-card>
+

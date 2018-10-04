@@ -1,0 +1,18 @@
+<div class="alert alert-danger col-md-4 offset-md-4" *mwAMenosQue="(turmas | mwFilterByDescription:filtro).length > 0">
+    <h3>Nenhuma turma atende ao requisito de filtro!</h3>
+</div>
+  
+<div class="row align-middle">
+    <div *ngFor="let turma of (turmas | mwFilterByDescription:filtro)" class="col-md-4">
+        <div class="card mb-3" mwEvidenceOnHover>
+        <div class="card-header">
+            Turma: <strong>{{turma.codigo}}</strong>
+        </div>
+        <div class="card-body">
+            <p class="card-title" >Semestre: <strong>{{turma.semestre}}</strong></p>
+            <p class="card-title" >Descrição: <strong>{{turma.descricao}}</strong></p>
+        </div>
+        </div>
+    </div>
+</div>
+  

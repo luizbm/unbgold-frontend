@@ -1,0 +1,15 @@
+.header-icon {
+    padding: 0 14px 0;
+}
+  
+.header-spacer {
+    flex: 1 1 auto;
+}
+
+a.active {
+    background: rgba(240, 222, 222, 0.473);
+}
+
+.tool-bar-title {
+    padding-right: 20px;
+}
