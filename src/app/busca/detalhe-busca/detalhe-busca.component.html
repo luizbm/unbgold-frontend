@@ -1,0 +1,96 @@
+
+<div class="col-md-12">
+
+    <div class="col-lg-8" style="float:left">
+        <mat-divider></mat-divider>
+        <mat-card class="">
+            <mat-card-title>{{resposta.title}}</mat-card-title>
+            <mat-card-content>
+                <mat-list role="list">
+                    <mat-list-item role="listitem">
+                      <h4 mat-line><strong>Descrição</strong></h4>
+                      <p mat-line>{{resposta.description}} </p>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item role="listitem">
+                        <h4 mat-line><strong>Criado </strong> </h4>
+                        <p mat-line>{{resposta.created}}  </p>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item role="listitem">
+                        <h4 mat-line><strong>Frequência </strong> </h4>
+                        <p mat-line>{{resposta.frequency}}  </p>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item role="listitem">
+                        <h4 mat-line><strong>Órgão Responsável</strong></h4>
+                        <p mat-line>{{resposta.organization}}  </p>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item role="listitem">
+                        <h4 mat-line><strong>Idioma</strong> </h4>
+                        <p mat-line>{{resposta.language}}  </p>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item role="listitem">
+                        <h4 mat-line><strong>Tipo</strong> </h4>
+                        <p mat-line>{{resposta.type}}  </p>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item role="listitem">
+                        <h4 mat-line><strong>Fonte</strong> </h4>
+                        <p mat-line>{{resposta.source}}  </p>
+                    </mat-list-item>
+                  </mat-list>
+            </mat-card-content>
+          </mat-card>
+          <mat-divider></mat-divider>
+          <mat-card class="">
+              <mat-card-title>Vocabulário</mat-card-title>
+               <mat-card-content>
+                 <mat-nav-list>
+                    <a target="_blank" href="{{vocab.link}}" *ngFor="let vocab of vocabularios" style=" height: 50px !important;">
+                        <h5 mat-line> {{ vocab.name }} </h5>
+                        <p mat-line>  {{ vocab.desc }} </p>
+                   </a>
+                 </mat-nav-list>
+               </mat-card-content>
+            </mat-card>
+    </div>
+    <div class="col-lg-4" style="float:right">
+        <div class="">
+            <mat-divider></mat-divider>
+            <mat-card class="">
+                <mat-card-title>Faça o Download</mat-card-title>
+                <mat-card-content>
+                    <mat-nav-list>
+                        <a mat-raised-button style="background-color:#003a7a;color:#fff;text-transform: uppercase;margin: 3px;" routerLink="." *ngFor="let format of resposta.fileFormat" >{{ format }} <mat-icon>archive</mat-icon></a>
+                        
+                    </mat-nav-list>
+                </mat-card-content>
+              </mat-card>
+              <mat-divider></mat-divider>
+              <mat-card class="">
+                  <mat-card-title>Conjuntos de Dados Conectados</mat-card-title>
+                  <mat-card-content>
+                      <mat-nav-list>
+                          <a mat-list-item  *ngFor="let rel of relations"   routerLink="{{ rel.link }}" title="{{ rel.desc }}" style=" height: 30px !important;"> {{ rel.name }} </a>
+                      </mat-nav-list>
+                  </mat-card-content>
+                </mat-card>
+                <mat-divider></mat-divider>
+                <mat-card class="">
+                  <mat-card-title>Marcadores</mat-card-title>
+                   <mat-card-content>
+                     <mat-nav-list>
+                        <a mat-list-item href="#" *ngFor="let tags of resposta.subject" style=" height: 30px !important;"> {{ tags }} </a>
+                     </mat-nav-list>
+                   </mat-card-content>
+                </mat-card>
+          </div> 
+      </div>
+              
+
+
+
+</div>

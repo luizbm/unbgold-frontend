@@ -1,0 +1,61 @@
+mat-slide-toggle{
+    display: flex;
+}
+
+mat-form-field{
+    display: grid;
+}
+
+
+  .mat-form-field-infix {
+    display: block;
+    position: relative;
+    flex: auto;
+    min-width: 0;
+    width: 500px !important;
+}
+
+h5 {
+     margin: 20px 10px 20px 10px !important;
+  }
+  
+  .example-section {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+  }
+  
+  .example-margin {
+    margin: 0 10px;
+  }
+
+  table{
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .example-chip-list {
+    width: 100%;
+  }
+
+  .mat-elevation-z8{
+    width: 100%;
+}
+.form_uri{
+  width: 48%;
+  display: inline-block;
+}
+
+.uri_complemento{
+  float: right !important;
+}
+table mat-form-field{
+  width:90%
+}
+
+.form_parametro{
+  width: 25%;
+  margin-right: 10px;
+  display: inline-block;
+}

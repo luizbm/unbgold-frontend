@@ -1,0 +1,49 @@
+<div class="col-md-12">
+    <mat-divider></mat-divider>
+    <mat-card class="">
+      <mat-card-title>Pesquisar</mat-card-title>
+    <mat-card-content>
+      <div class="col-md-11 ml-4 mb-5 mt-3">
+        <form [formGroup]="buscaForm" class="form mt-4" (submit)="buscar()">
+          <div class="busca-container">
+            <mat-form-field>
+              <input 
+                formControlName="busca"
+                matInput class="input_busca" 
+                placeholder="Buscar Pelos Conjuntos de Dados"
+                autofocus>
+              
+            </mat-form-field>
+            <button 
+              mat-raised-button 
+              type="submit"
+              color="primary" >Buscar<mat-icon matSuffix>search</mat-icon></button>
+          </div>
+        </form>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-divider></mat-divider>
+  <mat-card class="">
+      <mat-card-title>Resultados</mat-card-title>
+    <mat-card-content>
+
+      
+      <div class="col-md-11 ml-4 mb-5 mt-3">
+        <mat-list>
+        
+          <mat-nav-list *ngFor="let res of resultados">
+              <a matLine  routerLink="/buscaDetalhe/{{res.identifier}}">
+                  <h4 mat-line>{{res.title}}</h4>
+                  <p mat-line>  {{res.subject}}  </p>
+              </a>
+              
+          </mat-nav-list>
+
+        </mat-list>
+      </div>
+   
+  </mat-card-content>
+</mat-card>
+<mat-divider></mat-divider>
+</div>

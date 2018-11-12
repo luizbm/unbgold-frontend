@@ -1,0 +1,23 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .example-container > * {
+    width: 100%;
+  }
+
+  .busca-container  {
+   
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .busca-container mat-form-field {
+    width: 90%;
+    margin-right: 10px;
+  }
+
+  .busca-container button {
+    width: 9%;
+  }

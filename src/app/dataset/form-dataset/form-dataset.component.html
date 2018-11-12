@@ -1,0 +1,366 @@
+
+<div class="col-md-12" >
+
+<!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+    {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+  </button> -->
+  <mat-horizontal-stepper [linear]="isLinear" #stepper>
+    
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+      
+        <ng-template matStepLabel>Publicação e Automatização</ng-template>
+   
+        <h5 class="example-h2">Configuração de Publicação</h5>
+
+        <mat-slide-toggle 
+            formControlName="indexar"
+            [(ngModel)]="indexar"
+            toggleChange="testeBotao()">
+        Automatizar Publicação?</mat-slide-toggle>
+
+        <mat-form-field >
+            <mat-select placeholder="Instância CKAN" [disabled]="!indexar">
+              <mat-option *ngFor="let ins of instancias_ckan" [value]="ins.value">
+                {{ins.label}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Frequência de Pulbicação" [disabled]="!indexar">
+              <mat-option *ngFor="let fre of frequencia" [value]="fre.value">
+                {{fre.label}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Dia da Pulbicação" [disabled]="!indexar">
+              <mat-option *ngFor="let dia of dias" [value]="dia.value">
+                {{dia.label}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        <mat-form-field>
+          <input matInput type="time" placeholder="Horário de Publicação" [disabled]="!indexar" >
+        </mat-form-field>
+        <mat-divider></mat-divider>
+        <h5>Formato de arquivo para publicação</h5>
+        <section class="example-section">
+          <mat-checkbox class="example-margin" color="warn">RDF</mat-checkbox>
+          <mat-checkbox class="example-margin" color="warn">CSV</mat-checkbox>
+          <mat-checkbox class="example-margin" color="warn">JSON</mat-checkbox>
+        </section>
+        <mat-divider></mat-divider>
+        <div style="text-align: right">
+          <button mat-button matStepperNext color="primary" >Próximo <mat-icon>fast_forward</mat-icon></button>
+        </div>
+      </form>
+    </mat-step>
+     
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Informações Sobre os Dados </ng-template>
+
+        <h5 class="example-h2">Extração dos Dados</h5>
+        <mat-form-field>
+          <input matInput placeholder="Fonte dos Dados" formControlName="fonte">
+        </mat-form-field>
+
+        <mat-divider></mat-divider>
+        <h5>Filtros:</h5>
+        <mat-form-field class="form_parametro">
+          <input matInput placeholder="Parâmetro"
+          formControlName="form_parametro_nome"
+          [(ngModel)]="form_parametro_nome"
+          >
+        </mat-form-field>
+        
+        <mat-form-field class="form_parametro">
+          <mat-select placeholder="Tipo de Parametros"
+              formControlName="form_parametro_tipo"
+              [(ngModel)]="form_parametro_tipo">
+            <mat-optgroup *ngFor="let group of tipo_parametros" 
+                          [label]="group.name"
+                          [disabled]="group.disabled">
+              <mat-option *ngFor="let option of group.select_option" [value]="option.value">
+                {{option.label}}
+              </mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="form_parametro">
+           <input matInput type="text" placeholder="Valor"
+                  formControlName="form_parametro_valor"
+                  [(ngModel)]="form_parametro_valor"
+                  [disabled] = "disabledParametro"
+                  >
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="incluirParametro()">Incluir </button>
+
+
+        <table mat-table [dataSource]="lista_parametros" class="mat-elevation-z8" style="width: 100%">
+            <ng-container matColumnDef="nome">
+               <th mat-header-cell *matHeaderCellDef> Nome </th>
+               <td mat-cell *matCellDef="let par">{{par.nome}} </td>
+             </ng-container>
+            <ng-container matColumnDef="tipo">
+               <th mat-header-cell *matHeaderCellDef> Tipo </th>
+               <td mat-cell *matCellDef="let par">{{viewTipoParametro(par)}} </td>
+             </ng-container>
+             <ng-container matColumnDef="valor">
+                <th mat-header-cell *matHeaderCellDef> Valor </th>
+                <td mat-cell *matCellDef="let par">{{par.valor}} </td>
+              </ng-container>
+            <ng-container matColumnDef="id">
+               <th mat-header-cell *matHeaderCellDef> Ação </th>
+               <td mat-cell *matCellDef="let par"><button mat-raised-button (click)="ecluirParametro(par)" color="warn">Excluir</button> </td>
+             </ng-container>
+             
+           
+             <tr mat-header-row *matHeaderRowDef="displayedColumnsParametro"></tr>
+             <tr mat-row *matRowDef="let row; columns: displayedColumnsParametro;"></tr>
+          </table>
+ 
+
+        <mat-divider></mat-divider>
+
+        <h5 class="example-h2">Metadados de Identificação</h5>
+
+        
+        <mat-form-field>
+          <input matInput placeholder="Título">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Descrição" >
+          </mat-form-field>
+  
+        <mat-form-field>
+          <input matInput placeholder="Órgão Responsável">
+        </mat-form-field>
+
+        <mat-form-field class="example-chip-list">
+            <mat-chip-list #chipList>
+              <mat-chip *ngFor="let marca of marcadores" [selectable]="selectable"
+                       [removable]="removable" (removed)="remove(marca)">
+                {{marca.nome}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="Novo Marcador..."
+                     [matChipInputFor]="chipList"
+                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                     [matChipInputAddOnBlur]="addOnBlur"
+                     (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+          </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Documentação" >
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Granularidade Temporal">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <textarea matInput placeholder="Metodologia"></textarea>
+          </mat-form-field>
+
+
+        <mat-form-field>
+          <input matInput placeholder="Address">
+        </mat-form-field>
+
+
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="threeFormGroup">
+        <form [formGroup]="threeFormGroup">
+          <ng-template matStepLabel>Vocabulário Controlado</ng-template>
+         
+          <h5 class="example-h2">Selecione os Vocabulários e Ontologias</h5>
+         
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+           
+            <ng-container matColumnDef="select">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? masterToggle() : null"
+                              [checked]="selection.hasValue() && isAllSelected()"
+                              [indeterminate]="selection.hasValue() && !isAllSelected()">
+                </mat-checkbox>
+              </th>
+              <td mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()"
+                              (change)="$event ? selection.toggle(row) : null"
+                              [checked]="selection.isSelected(row)">
+                </mat-checkbox>
+              </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="nm_ontologia">
+              <th mat-header-cell *matHeaderCellDef> Ontologia </th>
+              <td mat-cell *matCellDef="let element"> {{element.nm_ontologia}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="prefixo_ontologia">
+              <th mat-header-cell *matHeaderCellDef> Prefixo </th>
+              <td mat-cell *matCellDef="let element"> {{element.prefixo_ontologia}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="url_ontologia">
+              <th mat-header-cell *matHeaderCellDef> Endereço </th>
+              <td mat-cell *matCellDef="let element"> {{element.url_ontologia}} </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                (click)="selection.toggle(row)">
+            </tr>
+          </table>
+
+
+
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="buscarOntologiaSelecionadas()">Teste Select Ontologia</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step >
+         
+            <ng-template matStepLabel>Indexação Semântica</ng-template>
+            
+            <form [formGroup]="fourFormGroup">
+              <h5 class="example-h2">Selecione os Vocabulários e Ontologias</h5>
+              <mat-form-field>
+                <mat-select placeholder="Tipo" formControlName="id_termo">
+                  <mat-option *ngFor="let fre of termos" [value]="fre.value">
+                    {{fre.label}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <h5>URI</h5>
+              <mat-form-field class="form_uri">
+                <input matInput  type="url" placeholder="IRI" formControlName="uri" >
+              </mat-form-field>
+              <mat-form-field class="form_uri uri_complemento">
+                <mat-select placeholder="Complemento do URI" formControlName="complemento_iri">
+                  <mat-option *ngFor="let fre of colunas" [value]="fre.value">
+                    {{fre.label}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            
+
+            <mat-divider></mat-divider>
+            <h5 class="example-h2">Definição de Objeto e Predicado</h5>
+
+            <table mat-table [dataSource]="dataSourceColunas" class="mat-elevation-z8">
+
+
+              <ng-container matColumnDef="nome">
+                <th mat-header-cell *matHeaderCellDef> Campo </th>
+                <td mat-cell *matCellDef="let element"> {{element.nome}}    </td>
+              </ng-container>
+
+              <ng-container matColumnDef="selectColunas">
+                <th mat-header-cell *matHeaderCellDef>
+                  Publicar
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  <mat-checkbox (click)="habilitar(element)" formControlName="nameFormControl"  [(ngModel)]="element.publicar" >
+                  </mat-checkbox>
+                </td>
+              </ng-container>
+            
+
+            
+              <ng-container matColumnDef="predicadoColuna">
+                <th mat-header-cell *matHeaderCellDef> Predicado </th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-form-field class="form_uri">
+                        <mat-select placeholder="Selecione o Vocabulário" 
+                            [disabled] = "!element.publicar"
+                            (selectionChange)="buscarIntegrado(element)"
+                            formControlName="nameFormControl"
+                            [(ngModel)]="element.termo">
+                          <mat-option *ngFor="let pre of termos" [value]="pre.value">
+                            {{pre.label}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="objeto">
+                <th mat-header-cell *matHeaderCellDef> Objeto </th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-form-field class="form_uri">
+                        <mat-select  placeholder="Selecione o Objeto"  
+                              formControlName="objetoFormControl"  
+                              [(ngModel)]="element.tipoObjeto"  
+                              [disabled] = "!element.publicar"
+                              formControlName="nameFormControl"
+                              [(ngModel)]="element.tipoObjeto"
+                              (selectionChange)="buscarColunaDataset(element)">
+                          <mat-option *ngFor="let obj of element.objeto" [value]="obj.value">
+                            {{obj.label}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+                </td>
+              </ng-container>
+            
+
+              <ng-container matColumnDef="complemento">
+                  <th mat-header-cell *matHeaderCellDef> Complemento </th>
+                  <td mat-cell *matCellDef="let element">
+                      <mat-form-field class="form_uri">
+                          <mat-select placeholder="Selecione" [disabled] = "element.tipoObjeto==1">
+                            <mat-option *ngFor="let com of element.complemento" [value]="com.value">
+                              {{com.label}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+  
+                  </td>
+                </ng-container>
+
+                
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumnsColunas"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumnsColunas;">
+              </tr>
+            </table>  
+           <h1>{{debug}}</h1>           
+           </form>
+
+
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          
+        </mat-step>
+    <mat-step>
+        
+          
+      <ng-template matStepLabel>Concluir</ng-template>
+      You are now done.
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

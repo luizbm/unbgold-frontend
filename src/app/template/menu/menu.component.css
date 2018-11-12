@@ -1,0 +1,52 @@
+.side-h {
+    width: 250px;
+    height: 100%;
+    position: fixed;
+    margin-top: 64px;
+}
+
+.side-mg-l {
+    margin-left: 250px;
+}
+
+.mat-tab-header, .mat-tab-body-content{
+    background-color: #fff;
+}
+
+.item-menu-side-divisor{
+    background: #eee;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 8px 16px;
+}
+
+.item-menu-side{
+    font-size: 14px;
+    font-weight: 600;
+}
+a div {
+    color: rgb(17, 17, 17);
+}
+
+a div:hover, a div:link {
+    background-color: rgb(233, 233, 233);
+    text-decoration: none;
+    color: rgb(17, 17, 17);
+}
+
+.fa-side {
+    color: #676565;
+    font-size: 18px;
+}
+
+.mat-button-side {
+    width: 100%
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+table {
+    width: 100%;
+  }
