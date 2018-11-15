@@ -17,14 +17,6 @@ export const lista_ontologia: ontologia[]  = [{
     "versao": "2012-06-14"
 },
 {
-    "comentario": "Metadados para auxiliar publicação de objetos literais",
-    "id_ontologia": 3,
-    "nm_ontologia": "Literal",
-    "prefixo_ontologia": "literal",
-    "url_ontologia": "http://unb.br/literal",
-    "versao": "0.9 beta"
-},
-{
     "comentario": "Este documento é o resultado das discussões acerca do tema Estruturas Organizacionais Governamentais e o SIORG[1][3], abordados durante três reuniões, nos dias 8, 13 e 20 de setembro de 2011, entre participantes da Secretaria-Executiva (SE) e das Secretarias de Gestão (SEGES) e de Logística e Tecnologia da Informação (SLTI).",
     "id_ontologia": 4,
     "nm_ontologia": "Estruturas Organizacionais Governamentais Brasileiras",
@@ -43,7 +35,7 @@ export const lista_ontologia: ontologia[]  = [{
 {
     "comentario": "Ontologia temporaria",
     "id_ontologia": 6,
-    "nm_ontologia": "UnB Ontologia Temporaria",
+    "nm_ontologia": "UnB Vocabulário",
     "prefixo_ontologia": "uvoc",
     "url_ontologia": "http://dadosabertos.unb.br/images/UnBVocabulario.owl",
     "versao": "0.1"
@@ -80,12 +72,4 @@ export const lista_ontologia: ontologia[]  = [{
     "url_ontologia": "http://purl.org/dc/dcmitype",
     "versao": "2012-06-14"
 },
-{
-    "comentario": "http://vocab.e.gov.br/2011/03/vcge",
-    "id_ontologia": 11,
-    "nm_ontologia": "Vocabulário Controlado do Governo Eletrônico",
-    "prefixo_ontologia": "vcge",
-    "url_ontologia": "http://vocab.e.gov.br/2011/03/vcge",
-    "versao": "2013-03"
-}
 ];

@@ -79,11 +79,13 @@ export class FormDatasetComponent implements OnInit {
   ]
 
   colunas : select_option[] = [
-    {"value" : 1, "label" : "cod_departamento" },
-    {"value" : 2, "label" : "sigla_departamento" },
-    {"value" : 3, "label" : "nome_departamento" },
-    {"value" : 4, "label" : "cod_orgao" },
-    {"value" : 5, "label" : "nome_orgao" },
+    {"value" : 1, "label" : "cod_oferta" },
+    {"value" : 2, "label" : "turma" },
+    {"value" : 3, "label" : "vagas_oferecidas" },
+    {"value" : 4, "label" : "periodo" },
+    {"value" : 5, "label" : "matricula_professor" },
+    {"value" : 6, "label" : "cod_materia" },
+    {"value" : 7, "label" : "sigla_departamento" },
   ];
 
   termos : any = [];
@@ -116,10 +118,6 @@ export class FormDatasetComponent implements OnInit {
   lista_parametros : list_parametros[] = [
     {"id" : 1, "nome" : "ano", "tipo" : 4, "valor" : "Anual" },
     {"id" : 2, "nome" : "departamento", "tipo" : 10, "valor" : "Departamento de Administração" },
-    {"id" : 3, "nome" : "ano", "tipo" : 4, "valor" : "Anual" },
-    {"id" : 4, "nome" : "departamento", "tipo" : 10, "valor" : "Departamento de Administração" },
-    {"id" : 5, "nome" : "ano", "tipo" : 4, "valor" : "Anual" },
-    {"id" : 6, "nome" : "departamento", "tipo" : 10, "valor" : "Departamento de Administração" },
     ];
    parametro: list_parametros;
    displayedColumnsParametro: string[] = ['nome', 'tipo', 'valor', 'id'];
@@ -293,6 +291,7 @@ export class FormDatasetComponent implements OnInit {
         (response) => {
           element.objeto = [{"value" : 1, "label" : "Objeto Literal"}];
           console.log(response);
+         
           for(var i:number=0;i<response.length;i++){
             console.log(response[i]);
             element.objeto.push({"value": response[i].id_dataset, "label": response[i].ds_dataset});

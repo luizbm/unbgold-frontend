@@ -52,7 +52,7 @@
         </section>
         <mat-divider></mat-divider>
         <div style="text-align: right">
-          <button mat-button matStepperNext color="primary" >Próximo <mat-icon>fast_forward</mat-icon></button>
+          <button mat-button matStepperNext color="primary" >Próximo <mat-icon>arrow_forward_ios</mat-icon></button>
         </div>
       </form>
     </mat-step>
@@ -172,10 +172,9 @@
           <input matInput placeholder="Address">
         </mat-form-field>
 
-
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+        <div  style="text-align: right" >
+          <button mat-button matStepperPrevious color="primary" style="margin-right: 5px"> <mat-icon>arrow_back_ios</mat-icon> Voltar</button>
+          <button mat-button matStepperNext color="primary" >Próximo <mat-icon>arrow_forward_ios</mat-icon></button>
         </div>
       </form>
     </mat-step>
@@ -225,11 +224,9 @@
           </table>
 
 
-
-          <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button (click)="buscarOntologiaSelecionadas()">Teste Select Ontologia</button>
-            <button mat-button matStepperNext>Next</button>
+          <div  style="text-align: right" >
+            <button mat-button matStepperPrevious color="primary" style="margin-right: 5px"> <mat-icon>arrow_back_ios</mat-icon> Voltar</button>
+            <button mat-button matStepperNext color="primary" (click)="buscarOntologiaSelecionadas()">Próximo <mat-icon>arrow_forward_ios</mat-icon></button>
           </div>
         </form>
       </mat-step>
@@ -342,14 +339,14 @@
               <tr mat-row *matRowDef="let row; columns: displayedColumnsColunas;">
               </tr>
             </table>  
-           <h1>{{debug}}</h1>           
+                   
            </form>
 
 
-            <div>
-              <button mat-button matStepperPrevious>Back</button>
-              <button mat-button matStepperNext>Next</button>
-            </div>
+           <div  style="text-align: right" >
+            <button mat-button matStepperPrevious color="primary" style="margin-right: 5px"> <mat-icon>arrow_back_ios</mat-icon> Voltar</button>
+            <button mat-button matStepperNext color="primary">Concluir <mat-icon>arrow_forward_ios</mat-icon></button>
+          </div>
           
         </mat-step>
     <mat-step>
@@ -364,3 +361,4 @@
     </mat-step>
   </mat-horizontal-stepper>
 </div>
+<h1 style="margin-top:30px">{{debug}}</h1>  
